@@ -1,4 +1,3 @@
-//Write a MPI program to demonstration of MPI_Send and MPI_Recv 
 #include <stdio.h>
 #include <mpi.h>
 
@@ -6,13 +5,8 @@ int main(int argc, char *argv[]) {
     int rank, size;
     int number;
 
-    // Initialize the MPI environment
     MPI_Init(&argc, &argv);
-
-    // Get the number of processes
     MPI_Comm_size(MPI_COMM_WORLD, &size);
-
-    // Get the rank of the process
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     if (size < 2) {
@@ -24,7 +18,6 @@ int main(int argc, char *argv[]) {
     }
 
     if (rank == 0) {
-        // Process 0 sends a number to Process 1
         number = 42;
         printf("Process 0 is sending number %d to Process 1\n", number);
         MPI_Send(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
@@ -34,7 +27,7 @@ int main(int argc, char *argv[]) {
         printf("Process 1 received number %d from Process 0\n", number);
     }
 
-    // Finalize the MPI environment
     MPI_Finalize();
     return 0;
 }
+
